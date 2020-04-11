@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>学员详细信息</title>
+    <style type="text/css">
+        li {
+            list-style: none;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <ul>
+            <li>学号：@ViewBag.stu.StudentId </li>
+            <li>姓名：@ViewBag.stu.StudentName </li>
+            <li>性别：@ViewBag.stu.Gender </li>
+            <li>出生日期：@ViewBag.stu.Birthday  </li>
+            <li>身份证号：@ViewBag.stu.StudentIdNo </li>
+            <li>手机号码：@ViewBag.stu.PhoneNumber  </li>
+            <li>家庭住址：@ViewBag.stu.StudentAddress </li>
+        </ul>
+
+    </div>
+</body>
+</html>

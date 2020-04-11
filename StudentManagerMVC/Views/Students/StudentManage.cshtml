@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+@*@{string userName = ((Models.Admins)Session["CurrentUser"]).LoginName;}*@
+@using Models;
+<html>
+<head>
+    <title>学员信息管理</title>
+    <link href="../../styles/stuManage.css" rel="stylesheet" />
+    <script src="~/jquery/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#btnquery").click(function () {
+                var cName = $("#ClassName").val();
+                $.post("/Students/getStulistJsonByClassName", { "ClassName": cName }, function (data, status) {
+                    var list = $.parseJSON(data);
+                    alert("dsfds");
+                    for (var i = 0; i < list.length; i++) {
+                        var li = "<li>" +
+                            list[i].StudentId + "&nbsp;&nbsp;" +
+                            list[i].StudentName + "&nbsp;&nbsp;" +
+                            list[i].Gender + "&nbsp;&nbsp;" +
+                            list[i].ClassName + "&nbsp;&nbsp;" +
+                            list[i].StudentIdNo + "&nbsp;&nbsp;" +
+                            list[i].PhoneNumber + "&nbsp;&nbsp;" +
+                            list[i].StudentAddress + "&nbsp;&nbsp;"
+                            +"</li>"
+                        $("#stulist").append(li);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h2>@*当前用户：@userName*@
+            @*@Html.Action("LoginedDemo", "AdminLogin")*@
+            @Html.Partial("LoginedDemo", (Admins)Session["CurrentUser"]);
+        </h2>
+        <div id="querydiv">
+            <div id="formdiv">
+                <form method="post" action="/Students/StudentManage">
+                    班级：
+                    <input type="text" name="ClassName" id="ClassName" value="@(ViewBag.className)"/>
+                    <input type="button" id="btnquery" value="查询" />
+                </form>
+            </div>
+            <div id="adddiv"><a href="/Students">新增学员</a>    </div>
+        </div>
+        <div id="studiv">
+            
+                
+        </div>
+        <ul id="stulist"></ul>
+    </div>
+</body>
+</html>

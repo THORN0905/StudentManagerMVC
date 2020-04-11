@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+@*@{string userName = ((Models.Admins)Session["CurrentUser"]).LoginName;}*@
+@using Models;
+<html>
+<head>
+    <title>学员信息管理</title>
+    <link href="../../styles/stuManage.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="container">
+        <h2>@*当前用户：@userName*@
+            @*@Html.Action("LoginedDemo", "AdminLogin")*@
+            @Html.Partial("LoginedDemo", (Admins)Session["CurrentUser"]);
+        </h2>
+        <div id="querydiv">
+            <div id="formdiv">
+                <form method="post" action="/Students/StudentManage">
+                    班级：
+                    <input type="text" name="className" value="@(ViewBag.className)"/>
+                    <input type="submit" value="查询" />
+                </form>
+            </div>
+            <div id="adddiv"><a href="/Students">新增学员</a>    </div>
+        </div>
+        <div id="studiv">
+            @{
+            if (ViewBag.stuList != null)
+            {
+            foreach (Models.Ext.StudentsExt stu in ViewBag.stuList)
+            { 
+            <div class="stuList">
+                <div class="stuItem">@stu.StudentId</div>
+                <div class="stuItem">@stu.StudentName</div>
+                <div class="stuItem">@stu.ClassName</div>
+                <div class="stuItem"> <a href="/Students/StudentDetail?StudentId=@stu.StudentId">查看详细</a>  </div>
+                <div class="stuItem"> <a href="/Students/StudentShow?StudentId=@stu.StudentId">修改</a> </div>
+                <div class="stuItem">  <a href="#">删除</a>  </div>
+            </div>
+
+                }
+            }
+                if (@ViewData["result"] != null)
+                {
+                    int result = Convert.ToInt32(ViewData["result"]);
+                    if (result > 0) {  @("更新成功"); }
+                    else { @("更新失败")};
+                       
+                
+                }
+                
+            }
+        </div>
+    </div>
+</body>
+</html>

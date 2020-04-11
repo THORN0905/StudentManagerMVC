@@ -1,0 +1,24 @@
+﻿@model Models.Ext.StudentsExt
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>StudentUpdate</title>
+</head>
+<body>
+    <div style="margin:130px;">
+        <form name="stuinfo" method="post" action="/Students/StudentUpdate">
+            学号：<input type="text" name="StudentId" value="@Model.StudentId" readonly/><br />
+            姓名：<input type="text" name="StudentName" value="@Model.StudentName" /><br />
+            性别：<input type="text" name="Gender" value="@Model.Gender" /><br />
+            身份证号：<input type="text" name="StudentIdNo" value="@Model.StudentIdNo" /><br />
+            电话号码：<input type="text" name="PhoneNumber" value="@Model.PhoneNumber" /><br />
+            家庭住址：<textarea rows="5" cols="20" name="StudentAddress">@Model.StudentAddress</textarea><br />
+            <input type="submit" style="width:70px;height:40px;" name="btn_update" value="提交" />
+        </form>
+        
+    </div>
+</body>
+</html>
